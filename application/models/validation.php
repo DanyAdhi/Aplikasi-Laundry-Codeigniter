@@ -78,6 +78,20 @@ defined('BASEPATH') OR exit ('No script direct access allowed');
 		}
 
 
+		public function val_transaksi()
+		{
+			return [
+				[
+					'field'	=> 'berat',
+					'label'	=> 'Berat',
+					'rules'	=> 'required|rtrim',
+					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
+
+				]
+			];
+		}
+
+
 
 
 	}
