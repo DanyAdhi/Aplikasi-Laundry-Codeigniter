@@ -46,10 +46,17 @@ $aktif  = 'active';
           <i class="fas fa-fw fa-handshake"></i>
           <span>Transaksi Laundry</span></a>
       </li>
-      <li class="nav-item <?=($hal=='status')?$aktif:''; ?>">
-        <a class="nav-link" href="<?=base_url('admin/status') ?>">
+      <li class="nav-item <?=($hal=='status')?$aktif:''; ?>" >
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-stream"></i>
-          <span>Status Laundry</span></a>
+          <span>Status Laundry</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="buttons.html">Proses</a>
+            <a class="collapse-item" href="cards.html">Selesai</a>
+          </div>
+        </div>
       </li>
       <li class="nav-item <?=($hal=='laporan')?$aktif:''; ?>">
         <a class="nav-link" href="<?=base_url('admin/laporan') ?>">

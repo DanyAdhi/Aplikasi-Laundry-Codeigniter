@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 		}
 
 
-		public function add_cart()
+		public function add_cart_kiloan()
 		{
 			$id 	= $this->input->post('id');
 			$p 		= $this->model->get_by('pakaian', 'id_pakaian', $id)->row_array();
@@ -103,7 +103,7 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 						'id_transaksi' 		=> $id,
 						'tgl_transaksi'		=> date('d-m-Y'),
 						'jam_transaksi'		=> date('H-i-s'),
-						'paket_transaksi'	=> 'namapaket(harga)',
+						'paket_transaksi'	=> $paket.')',
 						'jenis_paket'		=> 'Kg',
 						'berat_jumlah'		=> $berat,
 						'total_transaksi'	=> $bayar
@@ -119,23 +119,12 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 						'nama_d'				=>	$item['name'],
 						'jumlah_d'				=>	$item['qty'],
 					];
-
-
 			$this->model->save('transaksi_detail', $data);
 			$this->cart->destroy();
 
 			}
 
-
-
-
-
-
-
 			redirect('admin/transaksi/berhasil');
-
-
-
 
 		}else{
 			$this->db->order_by('nama_pakaian', 'ASC');
@@ -147,9 +136,91 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 
 			$this->load->view('template/template', $data);
 		}
-
-		
 	}
+
+	public function satuan()
+	{
+		$this->db->order_by('nama_tarif', 'ASC');
+		$data = ['content'	=> $this->folder.('satuan'),
+				 'section'	=> $this->section,
+				 'tampil'	=> $this->model->get_by('tarif', 'jenis_tarif', 'Satuan')->result()
+				 ];
+
+		$this->load->view('template/template', $data);
+	}
+
+	public function add_cart_satuan()
+		{
+			$id 	= $this->input->post('id');
+			$p 		= $this->model->get_by('tarif', 'id_tarif', $id)->row_array();
+			$i 		=$p;
+
+			$data = [
+						'id'	=> $p['id_tarif'],
+						'name'	=> $p['nama_tarif'],
+						'price'	=> $p['biaya_tarif'],
+						'qty'	=> $this->input->post('jumlah')
+					];
+
+			if($this->cart->total_items()>0)
+			{
+				$id 		= $items['id'];
+				$idBarang 	= $this->input->post('id');
+				if($id==$idBarang)
+				{
+					$up=['rowid'=>$rowid];
+					$this->cart->update($up);
+				}
+				else
+				{
+					$this->cart->insert($data);
+				}
+			}
+			else
+			{
+				$this->cart->insert($data);
+			}
+		redirect('admin/transaksi/satuan');
+		}
+
+
+
+	public function save_satuan()
+	{
+
+			// Save ke table transaksi
+			date_default_timezone_set('Asia/Jakarta');
+			$bayar 	= $this->cart->total();
+
+			foreach ($this->cart->contents() as $item) 
+			{
+				$row 	= count($this->model->get_all($this->table)->result());
+				$id 	= date('dmyHis').'0'.($row+1);
+				$data = [
+							'id_transaksi' 		=> $id,
+							'tgl_transaksi'		=> date('d-m-Y'),
+							'jam_transaksi'		=> date('H-i-s'),
+							'paket_transaksi'	=> $item['name'].' ('.$item['price'].')',
+							'jenis_paket'		=> 'Pcs',
+							'berat_jumlah'		=> $item['qty'],
+							'total_transaksi'	=> $item['subtotal']
+						];
+				$this->model->save($this->table, $data);
+
+				// save ke table detail transaksi
+				$dati =	[
+							'id_detail' 			=>	null,
+							'id_transaksi_d'		=>	$id,
+							'nama_d'				=>	$item['name'],
+							'jumlah_d'				=>	$item['qty'],
+						];
+				$this->model->save('transaksi_detail', $dati);
+			}
+		
+		$this->cart->destroy();
+		redirect('admin/transaksi/berhasil');
+	}
+
 
 
 	public function berhasil()

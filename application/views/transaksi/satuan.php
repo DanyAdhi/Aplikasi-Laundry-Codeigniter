@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <!-- Page Heading -->
-  <h1 class="h3 mb-5 text-gray-800">Overview Data <?=$section?> Kiloan</h1>
+  <h1 class="h3 mb-5 text-gray-800">Overview Data <?=$section?> Satuan</h1>
 <?=$this->session->flashdata('flash') ?>
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex">
       <div>
-        <span class="m-0 font-weight-bold text-primary">Data <?=$section ?> Kiloan</span>
+        <span class="m-0 font-weight-bold text-primary">Data <?=$section ?> Satuan</span>
       </div>
       <div class="ml-auto">
         <a class="btn btn-sm btn-primary text-light" data-toggle="modal" data-target="#pakaian"><i class="fa fa-plus"></i> <b>Tambah</b></a>
@@ -18,8 +18,10 @@
           <thead>
               <tr>
                 <th style="text-align:center;width: 60px">NO</th>
-                <th style="text-align: left; width: 650px;">Jenis Pakaian</th>
+                <th style="text-align: left; width: 650px;">Jenis Barang</th>
                 <th style="width: 50px">Jumlah</th>
+                <th width="150px">Harga</th>
+                <th width="200px">Total</th>
                 <th style="text-align:center; width: 150px">Aksi</th>
               </tr>
             </thead>
@@ -33,6 +35,8 @@
                   <td align="center"><?=$no ?></td>
                   <td><?=$items['name'];?></td>
                   <td style="text-align:center;"> <?php echo number_format($items['qty']);?></td>   
+                  <td style="text-align:center;"> <?php echo number_format($items['price']);?></td>   
+                  <td style="text-align:center;"> <?php echo number_format($items['subtotal']);?></td>   
                   <td style="text-align:center;"><a href="<?php echo base_url().'admin/transaksi/remove_kiloan/'.$items['rowid'];?>" class="btn btn-danger btn-md"> Batal</a></td>
               </tr>
             </tbody>      
@@ -41,29 +45,16 @@
                 endforeach; 
               ?>
           </table>
-          <form method="POST" action="save_kiloan">
+          <form method="POST" action="save_satuan">
             <table class="mt-5">
               <tr>
-                <td>Paket</td>
-                <td>
-                  <select class="custom-select mb-2 ml-3" name="paket" id="paket">
-                    <?php foreach ($tarif as $tr) {?>
-                      <option value="<?=$tr->nama_tarif.' ('.$tr->biaya_tarif?>">
-                        <?=$tr->nama_tarif.' ('.$tr->biaya_tarif.')' ?>
-                      </option>  
-                    <?php } ?>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>Berat</td>
-                <td><input type="text" name="berat" class="form-control form-control-sm  ml-3" id="berat">
-                <?=form_error('berat', "<small class='text-danger ml-3'>",'</small>') ?>
+                <td>Jumlah Barang</td>
+                <td><input type="text" name="berat" class="form-control form-control-sm  ml-3" id="berat" value="<?php echo number_format($this->cart->total_items());?>" disabled> 
                 </td>
               </tr>
               <tr>
                 <td>Total bayar</td>
-                <td><input type="text" name="total" class="form-control form-control-sm my-2 ml-3" id="total"></td>
+                <td><input type="text" name="total" class="form-control form-control-sm my-2 ml-3" id="total" value="<?php echo number_format($this->cart->total());?>" disabled></td>
               </tr>
               <tr>
                 <td></td>
@@ -93,7 +84,7 @@
             <thead>
               <tr>
                 <th style="width: 30px">No</th>
-                <th style="width: 500px">Jenis Pakaian</th>
+                <th style="width: 500px">Nama Barang</th>
                 <th width="100px">Jumlah</th>
                 <th width="10px" class="text-center">Aksi</th>
               </tr>
@@ -102,16 +93,16 @@
               <?php
                 $no=1;
                 foreach($tampil as $t){ 
-                $id = $t->id_pakaian; 
+                $id = $t->id_tarif; 
               ?>
               <tr>
                 <td align="center"><?=$no ?></td>
-                <td><?=$t->nama_pakaian ?></td>
+                <td><?=$t->nama_tarif ?></td>
 
-                  <form method="POST" action="<?=base_url('admin/transaksi/add_cart_kiloan') ?>">
+                  <form method="POST" action="add_cart_satuan">
                 <td><input type="number" name="jumlah" class="form-control form-contrl-sm" style="width:70px" value="1"></td>
                 <td align="center">
-                    <input type="hidden" name="id" value="<?=$t->id_pakaian ?>">
+                    <input type="hidden" name="id" value="<?=$id ?>">
                     <button href="" class="btn btn-sm btn-danger" title="Hapus" >Pilih</button>
                   </form>
                 </td>
@@ -125,14 +116,11 @@
   </div>
 <!-- End Modal add -->
 
-<script>
+<!-- <script>
   $(document).ready(function(){
     $('#paket').change(function(){
-      var berat = $('#berat').val();
       var paket = $(this).val();
-      var paket = paket.split('(');
-      var paket = paket[1];
-      console.log(paket);
+      var berat = $('#berat').val();
       var total = berat*paket;
       $('#total').val(total);
     });
@@ -142,10 +130,6 @@
     $('#berat').on("input", function(){
       var berat = $('#berat').val();
       var paket = $('#paket').val();
-      var paket = paket.split('(');
-      var paket = paket[1];
-
-      console.log(paket);
 
       var total = berat*paket;
       $('#total').val(total);
@@ -153,4 +137,4 @@
 
 
   });
-</script>
+</script> -->
