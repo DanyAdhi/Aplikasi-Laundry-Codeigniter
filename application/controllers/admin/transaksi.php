@@ -95,18 +95,21 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 			date_default_timezone_set('Asia/Jakarta');
 			$row 	= count($this->model->get_all($this->table)->result());
 			$id 	= date('dmyHis').'0'.($row+1);
+			$nama 	= $this->input->post('nama');
 			$paket 	= $this->input->post('paket');
 			$berat 	= $this->input->post('berat');
 			$bayar 	= $this->input->post('total');
 
 			$data = [
 						'id_transaksi' 		=> $id,
+						'nama'				=> $nama,
 						'tgl_transaksi'		=> date('d-m-Y'),
 						'jam_transaksi'		=> date('H-i-s'),
 						'paket_transaksi'	=> $paket.')',
 						'jenis_paket'		=> 'Kg',
 						'berat_jumlah'		=> $berat,
-						'total_transaksi'	=> $bayar
+						'total_transaksi'	=> $bayar,
+						'status'			=> 0
 					];
 			$this->model->save($this->table, $data);
 
@@ -123,6 +126,19 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 			$this->cart->destroy();
 
 			}
+
+			// Save ke table status laundry
+			$data = [
+						'id_status'			=> null,
+						'id_transaksi_s'	=> $id,
+						'cuci'				=> 1,
+						'kering'			=> 0,
+						'strika'			=> 0,
+						'siap'				=> 0,
+						'selesai'			=> 0,
+						'tgl_ambil'			=> 0,
+					];
+			$this->model->save('transaksi_status', $data);
 
 			redirect('admin/transaksi/berhasil');
 
@@ -227,6 +243,10 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 	{
 		echo 'Berhasil';
 	}
+
+
+
+	
 
 }
 ?>

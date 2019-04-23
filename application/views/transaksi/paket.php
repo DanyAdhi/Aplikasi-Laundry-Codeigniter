@@ -13,12 +13,12 @@
       </div>
       <div class="row mb-5 justify-content-center">
         <div class="col-lg-4 d-flex justify-content-center">
-          <a href="transaksi/kiloan"> 
+          <a href="<?=base_url('admin/transaksi/kiloan') ?>"> 
             <button class="btn btn-info" style="height: 200px; width: 200px; font-size: 40px"> Kiloan </button>
           </a>
         </div>
         <div class="col-lg-4 d-flex justify-content-center">
-          <a href="transaksi/satuan">
+          <a href="<?=base_url('admin/transaksi/satuan') ?>">
             <button class="btn btn-primary" style="height: 200px; width: 200px; font-size: 40px"> Satuan </button>
           </a>
         </div>

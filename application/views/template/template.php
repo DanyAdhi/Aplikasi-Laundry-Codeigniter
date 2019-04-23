@@ -53,8 +53,8 @@ $aktif  = 'active';
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="buttons.html">Proses</a>
-            <a class="collapse-item" href="cards.html">Selesai</a>
+            <a class="collapse-item" href="<?=base_url('admin/status/proses') ?>">Proses</a>
+            <a class="collapse-item" href="<?=base_url('admin/status/selesai') ?>">Selesai</a>
           </div>
         </div>
       </li>

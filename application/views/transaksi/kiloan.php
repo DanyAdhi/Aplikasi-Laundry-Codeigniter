@@ -44,9 +44,15 @@
           <form method="POST" action="save_kiloan">
             <table class="mt-5">
               <tr>
+                <td>Nama</td>
+                <td>
+                  <input type="text" name="nama" class="form-control form-control-sm ml-3" value="<?=set_value('nama')?>"> <?=form_error('nama', "<small class='text-danger ml-3'>",'</small>') ?>
+                </td>
+              </tr>
+              <tr>
                 <td>Paket</td>
                 <td>
-                  <select class="custom-select mb-2 ml-3" name="paket" id="paket">
+                  <select class="custom-select my-2 ml-3" name="paket" id="paket">
                     <?php foreach ($tarif as $tr) {?>
                       <option value="<?=$tr->nama_tarif.' ('.$tr->biaya_tarif?>">
                         <?=$tr->nama_tarif.' ('.$tr->biaya_tarif.')' ?>
@@ -57,13 +63,13 @@
               </tr>
               <tr>
                 <td>Berat</td>
-                <td><input type="text" name="berat" class="form-control form-control-sm  ml-3" id="berat">
+                <td><input type="text" name="berat" class="form-control form-control-sm  ml-3" id="berat" value="<?=set_value('berat')?>">
                 <?=form_error('berat', "<small class='text-danger ml-3'>",'</small>') ?>
                 </td>
               </tr>
               <tr>
                 <td>Total bayar</td>
-                <td><input type="text" name="total" class="form-control form-control-sm my-2 ml-3" id="total"></td>
+                <td><input type="text" name="total" class="form-control form-control-sm my-2 ml-3" id="total" value="<?=set_value('total')?>"></td>
               </tr>
               <tr>
                 <td></td>

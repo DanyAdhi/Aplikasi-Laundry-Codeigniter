@@ -87,6 +87,12 @@ defined('BASEPATH') OR exit ('No script direct access allowed');
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
 
+				],
+				[
+					'field'	=> 'nama',
+					'label'	=> 'Nama Pemilik',
+					'rules'	=> 'required|rtrim',
+					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
 				]
 			];
 		}
