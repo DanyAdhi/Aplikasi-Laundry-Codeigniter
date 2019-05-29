@@ -19,12 +19,12 @@
                     <?=$this->session->flashdata('flash') ?>
                     <div class="form-group">
                       <label class="ml-3 font-weight-bold">Username</label>
-                      <input type="text" class="form-control form-control-user" placeholder="Enter Your Username..." name="username" value="<?=set_value('username')?>">
+                      <input type="text" class="form-control form-control-user" placeholder="Enter Your Username..." name="username" value="<?=set_value('username')?>" required>
                       <?= form_error('username',"<small class='text-danger ml-3'>","</small>")  ?>
                     </div>
                     <div class="form-group">
                       <label class="ml-3 font-weight-bold">Password</label>
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password">
+                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" name="password" required>
                       <?=form_error('password',"<small class='text-danger ml-3'>","</small>")?>
                     </div>
                     <hr>
