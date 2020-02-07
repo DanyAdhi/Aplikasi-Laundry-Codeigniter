@@ -1,4 +1,4 @@
-<h1 align="center"> Aplikasi Laundry Codeigniter</h1>
+<h1 align="center"> Sistem Informasi Laundry Codeigniter</h1>
 
 
 ## Pengantar
@@ -7,8 +7,8 @@
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-4.0-green.svg)](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
 [![SB Admin 2](https://img.shields.io/badge/%20-SB%20Admin%202-blue.svg)](https://startbootstrap.com/themes/sb-admin-2/)
 
-&emsp; &emsp; Ini adalah aplikasi laundry yang saya buat menggunakan Framework Codeigniter 3 untuk backend-nya dan framework bootstrap 4 untuk tampilannya. <br />
-&emsp; &emsp; Sistem ini berfungsi untuk ajang promosi usaha laundry yang kita punya, dapat juga digunakan untuk mencatat transaksi (Poin Of Sale) pelanggan-pelanggan yang menggunakan jasa laundry kita, selain itu user juga dapat melihat status barang yang sedang dilaundry (sedang dicuci, dikeringkan, disetrika dll) dihalaman user.<br />
+&emsp; &emsp; Ini adalah sistem informasi laundry yang saya buat menggunakan Framework Codeigniter 3 untuk backend-nya dan framework bootstrap 4 untuk tampilannya. <br />
+&emsp; &emsp; Sistem ini berfungsi untuk ajang promosi usaha laundry yang kita punya, dapat juga digunakan untuk mencatat transaksi (Poin Of Sale) pelanggan-pelanggan yang menggunakan jasa laundry kita, selain itu user juga dapat melihat status barang atau pakaian yang sedang dilaundry (sedang dicuci, dikeringkan, disetrika dll) dihalaman user.<br />
 	
 	
 ## Fitur
