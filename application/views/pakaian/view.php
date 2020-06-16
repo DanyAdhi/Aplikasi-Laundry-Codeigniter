@@ -26,7 +26,7 @@
             <?php
             $no=1;
              foreach($tampil as $t){ 
-              $id = str_replace(['=','+','/'], ['-','_','~'], $this->encrypt->encode($t->id_pakaian));
+              $id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($t->id_pakaian));
               $idd = $t->id_pakaian;
               ?>
             <tr>
@@ -76,7 +76,7 @@
 <!-- Modal Edit-->
 <?php foreach ($tampil as $tm) { 
   $a    = $tm->id_pakaian;
-  $iid   = str_replace(['=','+','/'], ['-','_','~'], $this->encrypt->encode($tm->id_pakaian));
+  $iid   = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($tm->id_pakaian));
   ?>
   <div class="modal fade" id="exampleModalLong<?=$a?>" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

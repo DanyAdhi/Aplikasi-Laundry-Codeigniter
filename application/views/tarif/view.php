@@ -26,7 +26,7 @@
           </thead>
           <tbody>
             <?php foreach($tampil as $t){ 
-              $id = str_replace(['=','+','/'], ['-','_','~'], $this->encrypt->encode($t->id_tarif));
+              $id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($t->id_tarif));
               ?>
             <tr>
               <td><?=$t->nama_tarif ?></td>

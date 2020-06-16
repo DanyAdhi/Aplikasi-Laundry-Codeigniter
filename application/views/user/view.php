@@ -25,7 +25,7 @@
           </thead>
           <tbody>
             <?php foreach($tampil as $t){ 
-              $id = str_replace(['=','+','/'],['-','_','~',], $this->encrypt->encode($t->id));
+              $id = str_replace(['=','+','/'],['-','_','~',], $this->encryption->encrypt($t->id));
               ?>
             <tr>
               <td><?=$t->nama ?></td>

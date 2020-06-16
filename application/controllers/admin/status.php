@@ -8,9 +8,11 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		var $table		= 'transaksi';
 
 		function __construct(){
-		parent::__construct();
-		$this->load->model(['model','validation']);
-		$this->load->library(['form_validation', 'encrypt']);	
+			parent::__construct();
+			if($this->session->userdata('masuk') !=TRUE){
+	            redirect(base_url('')); 
+	        };
+			$this->load->model(['model']);
 		}
 
 

@@ -15,7 +15,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">Welcome!</h1>
                   </div>
-                  <form class="user" method="POST" action="<?=base_url('admin/login/auth')?>"> 
+                  <form class="user" method="POST" action="<?=base_url('admin/auth/login')?>"> 
                     <?=$this->session->flashdata('flash') ?>
                     <div class="form-group">
                       <label class="ml-3 font-weight-bold">Username</label>

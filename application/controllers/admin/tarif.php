@@ -14,8 +14,11 @@ class Tarif extends CI_Controller{
 
 	function __construct(){
 		parent::__construct();
+		if($this->session->userdata('masuk') !=TRUE){
+            redirect(base_url('')); 
+        };
 		$this->load->model(['model','validation']);
-		$this->load->library(['form_validation', 'encrypt']);
+		$this->load->library(['form_validation', 'encryption']);
 
 	}
 
@@ -65,7 +68,7 @@ class Tarif extends CI_Controller{
 	{
 		if(!isset($id)) show_404();
 		$id = str_replace(['-','_','~'],['=','+','/'],$id);
-		$id = $this->encrypt->decode($id);
+		$id = $this->encryption->decrypt($id);
 		$this->model->delete($this->table, 'id_tarif' , $id);
 		$this->session->set_flashdata('flash', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Data telah di hapus.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 		redirect('admin/tarif');
@@ -75,7 +78,7 @@ class Tarif extends CI_Controller{
 	{
 		if(!isset($id)) show_404();
 		$id = str_replace(['-','_','~'],['=','+','/'],$id);
-		$id = $this->encrypt->decode($id);
+		$id = $this->encryption->decrypt($id);
 
 		$data = [
 					'content'	=> $this->folder.('edit'),

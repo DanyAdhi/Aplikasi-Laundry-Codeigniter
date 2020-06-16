@@ -78,6 +78,7 @@
             <div class="form-row">
               <div class="col-12 col-md-9 mb-2 mb-md-0">
                 <input type="text" class="form-control form-control-lg bg-light" placeholder="Masukkan ID Order Kamu..." name="idOrder" value="<?=$id ?>" onkeypress="return inputAngka(event)">
+                <p class="text-left font-italic text-muted">Input 08041912181802 or 08041912181803 for demo</p>
               </div>
               <div class="col-12 col-md-2">
                 <button type="submit" class="btn btn-block btn-lg btn-primary">Cari !</button>

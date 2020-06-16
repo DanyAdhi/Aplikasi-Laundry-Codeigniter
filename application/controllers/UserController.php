@@ -9,7 +9,7 @@ class UserController extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model(['model', 'validation']);
-		$this->load->library(['encrypt', 'form_validation']);
+		$this->load->library(['form_validation']);
 	}
 
 	public function index()
