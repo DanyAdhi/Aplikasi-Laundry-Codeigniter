@@ -46,7 +46,8 @@
               <tr>
                 <td>Nama</td>
                 <td>
-                  <input type="text" name="nama" class="form-control form-control-sm ml-3" value="<?=set_value('nama')?>"> <?=form_error('nama', "<small class='text-danger ml-3'>",'</small>') ?>
+                  <input type="text" name="nama" class="form-control form-control-sm ml-3" value="<?=set_value('nama')?>"> 
+                  <?=form_error('nama', "<small class='text-danger ml-3'>",'</small>') ?>
                 </td>
               </tr>
               <tr>
@@ -63,8 +64,9 @@
               </tr>
               <tr>
                 <td>Berat</td>
-                <td><input type="text" name="berat" class="form-control form-control-sm  ml-3" id="berat" value="<?=set_value('berat')?>">
-                <?=form_error('berat', "<small class='text-danger ml-3'>",'</small>') ?>
+                <td>
+                  <input type="text" name="berat" class="form-control form-control-sm  ml-3" id="berat" value="<?=set_value('berat')?>">
+                  <?=form_error('berat', "<small class='text-danger ml-3'>",'</small>') ?>
                 </td>
               </tr>
               <tr>
@@ -73,10 +75,13 @@
               </tr>
               <tr>
                 <td></td>
-                <td><button class="btn btn-sm btn-primary ml-3">Simpan</button></td>
+                <td>
+                  <button class="btn btn-sm btn-primary ml-3">Simpan</button>
+          </form>
+                  <a href="<?=base_url('admin/transaksi/paket')?>" class="btn btn-sm btn-secondary ml-3">Kembali</a>
+                </td>
               </tr>
             </table>
-          </form>
       </div>
     </div>
   </div>
