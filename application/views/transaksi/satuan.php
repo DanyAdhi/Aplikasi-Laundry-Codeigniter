@@ -37,7 +37,7 @@
                   <td style="text-align:center;"> <?php echo number_format($items['qty']);?></td>   
                   <td style="text-align:center;"> <?php echo number_format($items['price']);?></td>   
                   <td style="text-align:center;"> <?php echo number_format($items['subtotal']);?></td>   
-                  <td style="text-align:center;"><a href="<?php echo base_url().'admin/transaksi/remove_kiloan/'.$items['rowid'];?>" class="btn btn-danger btn-md"> Batal</a></td>
+                  <td style="text-align:center;"><a href="<?php echo base_url().'admin/transaksi/remove_satuan/'.$items['rowid'];?>" class="btn btn-danger btn-md"> Batal</a></td>
               </tr>
             </tbody>      
               <?php 
@@ -48,20 +48,32 @@
           <form method="POST" action="save_satuan">
             <table class="mt-5">
               <tr>
+                <td>Nama</td>
+                <td class="mb-2">
+                  <input type="text" name="nama" class="form-control form-control-sm ml-3" value="<?=set_value('nama')?>">
+                  <?=form_error('nama', "<small class='text-danger ml-3'>",'</small>') ?>
+                </td>
+              </tr>
+              <tr>
                 <td>Jumlah Barang</td>
-                <td><input type="text" name="berat" class="form-control form-control-sm  ml-3" id="berat" value="<?php echo number_format($this->cart->total_items());?>" disabled> 
+                <td>
+                  <input type="text" name="jumlah" class="form-control form-control-sm  ml-3" value="<?php echo number_format($this->cart->total_items());?>" readonly> 
+                  <?=form_error('jumlah', "<small class='text-danger ml-3'>",'</small>') ?>
                 </td>
               </tr>
               <tr>
                 <td>Total bayar</td>
-                <td><input type="text" name="total" class="form-control form-control-sm my-2 ml-3" id="total" value="<?php echo number_format($this->cart->total());?>" disabled></td>
+                <td><input type="text" name="total" class="form-control form-control-sm ml-3" id="total" value="<?php echo number_format($this->cart->total());?>" disabled></td>
               </tr>
               <tr>
                 <td></td>
-                <td><button class="btn btn-sm btn-primary ml-3">Simpan</button></td>
+                <td>
+                  <button class="btn btn-sm btn-primary ml-3">Simpan</button>
+          </form>
+                  <a href="<?=base_url('admin/transaksi/paket')?>" class="btn btn-sm btn-secondary ml-3">Kembali</a>
+                </td>
               </tr>
             </table>
-          </form>
       </div>
     </div>
   </div>

@@ -78,7 +78,7 @@ defined('BASEPATH') OR exit ('No script direct access allowed');
 		}
 
 
-		public function val_transaksi()
+		public function val_transaksi_kiloan()
 		{
 			return [
 				[
@@ -91,6 +91,23 @@ defined('BASEPATH') OR exit ('No script direct access allowed');
 				[
 					'field'	=> 'nama',
 					'label'	=> 'Nama Pemilik',
+					'rules'	=> 'required|rtrim',
+					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
+				]
+			];
+		}
+
+		public function val_transaksi_satuan(){
+			return [
+				[
+					'field'	=> 'nama',
+					'label'	=> 'Nama Pemilik',
+					'rules'	=> 'required|rtrim',
+					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
+				],
+				[
+					'field'	=> 'jumlah',
+					'label'	=> 'Jumlah Barang',
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
 				]
