@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 		}
 
 		public function index(){
+			$this->db->order_by('id_transaksi', 'DESC');
 			$data = [
 				'content'	=> $this->folder.('view'),
 				'section'	=> $this->section,
@@ -23,6 +24,30 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 			];
 
 			$this->load->view('template/template', $data);
+		}
+
+		public function detail($id=null){
+			$id = str_replace(['-','_','~'],['=','+','/'],$id);
+			$id = $this->encryption->decrypt($id);
+			$getOne = $this->model->get_by($this->table, 'id_transaksi', $id)->row_array();
+
+			if($getOne){
+				$getDetail = $this->model->get_by('transaksi_detail', 'id_transaksi_d', $id)->result();
+				$getOne['detail']= $getDetail;
+				$data = [
+					"data" 		=> $getOne,
+					"success"	=> true,
+					"message"	=> "Data detail transaksi"
+				];
+			}else{
+				$data = [
+					"data" 		=> "",
+					"success"	=> false,
+					"message"	=> "Data detail transaksi"
+				];
+			}
+
+			echo json_encode($data);
 		}
 
 		public function paket(){
@@ -135,7 +160,7 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 					'tgl_ambil'			=> 0,
 				];
 				$this->model->save('transaksi_status', $data);
-
+				$id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($id));
 				redirect('admin/transaksi/cetak/'.$id);
 
 			}else{
@@ -234,6 +259,7 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 				}
 				
 				$this->cart->destroy();
+				$id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($id));
 				redirect('admin/transaksi/cetak/'.$id);
 			}else{
 				$data = [
@@ -252,6 +278,9 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 
 		public function cetak($idTransaksi=null){
 			if(!isset($idTransaksi)) show_404();
+
+			$idTransaksi = str_replace(['-','_','~'],['=','+','/'],$idTransaksi);
+			$idTransaksi = $this->encryption->decrypt($idTransaksi);
 
 			$transaksi = $this->db->select('nama, tgl_transaksi, paket_transaksi, jenis_paket, berat_jumlah, total_transaksi, nama_d, jumlah_d')
 								->from('transaksi as a')
