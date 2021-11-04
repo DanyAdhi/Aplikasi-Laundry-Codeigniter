@@ -28,10 +28,12 @@ Software yang diperlukan untuk menjalankan aplikasi ini adalah
 ## Cara Instalasi
 1. Pastikan kamu sudah mendownload repositori ini.
 2. Ekstrak dan rubah nama foldernya menjadi 'laundry'.
-3. Letakkan repositori di dalam folder htdocts xampp kamu.
-4. Buka aplikasi xampp dan klik start pada apache dan mysql.
-5. Buka web browser dan tulis 'http://localhost/codeigniter/laundry' di form url lalu tekan enter.
-6. Tunggu sampai aplikasi terbuka.
+3. Letakkan repositori di dalam folder htdocts xampp kamu, contoh: "C:\xampp\htdocs\codeigniter\laundry".
+4. Buka di file "application/config/config.php".
+5. Sesuaikan value dari "$config['base_url']" dengan folder yang digunakan ketika menaruh repositori ini. contoh 'http://localhost/codeigniter/laundry'
+6. Buka aplikasi xampp dan klik start pada apache dan mysql.
+7. Buka web browser dan tulis 'http://localhost/codeigniter/laundry' di form url lalu tekan enter.
+8. Tunggu sampai aplikasi terbuka.
 
 
 ## Screenshot Halaman Admin
