@@ -251,14 +251,27 @@ defined('BASEPATH') OR exit ('No direct scrip access allowed');
 					// save ke table detail transaksi
 					$dati =	[
 						'id_detail' 			=>	null,
-						'id_transaksi_d'		=>	$id,
-						'nama_d'				=>	$item['name'],
+						'id_transaksi_d'	=>	$id,
+						'nama_d'					=>	$item['name'],
 						'jumlah_d'				=>	$item['qty'],
 					];
 					$this->model->save('transaksi_detail', $dati);
+					$this->cart->destroy();
 				}
-				
-				$this->cart->destroy();
+
+				// Save ke table status laundry
+				$data = [
+					'id_status'				=> null,
+					'id_transaksi_s'	=> $id,
+					'cuci'						=> 1,
+					'kering'					=> 0,
+					'strika'					=> 0,
+					'siap'						=> 0,
+					'selesai'					=> 0,
+					'tgl_ambil'				=> 0,
+				];
+				$this->model->save('transaksi_status', $data);
+		
 				$id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($id));
 				redirect('admin/transaksi/cetak/'.$id);
 			}else{
