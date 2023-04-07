@@ -12,11 +12,10 @@ class Tarif extends CI_Controller{
 	private $jenis;
 
 
-	function __construct(){
+	function __construct() {
 		parent::__construct();
-		if($this->session->userdata('masuk') !=TRUE){
-            redirect(base_url('')); 
-        };
+		if($this->session->userdata('masuk') != TRUE) { redirect(base_url('')); };
+		if($this->session->userdata('level') != 1) { redirect(base_url('admin/dashboard')); };
 		$this->load->model(['Model','Validation']);
 		$this->load->library(['form_validation', 'encryption']);
 
