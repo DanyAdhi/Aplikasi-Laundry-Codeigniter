@@ -13,7 +13,7 @@ class Pakaian extends CI_Controller {
 		if($this->session->userdata('masuk') !=TRUE){
             redirect(base_url('')); 
         };
-		$this->load->model(['model']);
+		$this->load->model(['Model']);
 		$this->load->library(['form_validation', 'encryption']);
 
 	}
@@ -24,7 +24,7 @@ class Pakaian extends CI_Controller {
 		$data = [
 					'content' 	=> $this->folder.('view'),
 					'section'	=> $this->section,
-					'tampil'	=> $this->model->get_all($this->table)->result()
+					'tampil'	=> $this->Model->get_all($this->table)->result()
 				];
 		$this->load->view('template/template', $data);
 	}
@@ -33,14 +33,14 @@ class Pakaian extends CI_Controller {
 	{
 		$this->form_validation->set_rules('nama', 'Jenis Pakaian', 'required|rtrim');
 		$post 	= $this->input->post();
-		$cek 	= count($this->model->get_by($this->table, 'nama_pakaian', $post['nama'])->result());
+		$cek 	= count($this->Model->get_by($this->table, 'nama_pakaian', $post['nama'])->result());
 		if ($this->form_validation->run()==true) {
 			if($cek<1){
 				$data = [
 							'id_pakaian'	=>null,
 							'nama_pakaian'	=>$post['nama']
 						];
-				$this->model->save($this->table, $data);
+				$this->Model->save($this->table, $data);
 				$this->session->set_flashdata('flash','<div class="alert alert-success alert-dismissible fade show" role="alert">Data berhasil di simpan.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>' );
 				redirect('admin/pakaian');
 			}else{
@@ -60,12 +60,12 @@ class Pakaian extends CI_Controller {
 		$post 		= $this->input->post();
 		$oldNama	= $post['oldNama'];
 		$nama 		= $post['nama'];
-		$cek = count($this->model->get_by($this->table, 'nama_pakaian', $nama)->result());
+		$cek = count($this->Model->get_by($this->table, 'nama_pakaian', $nama)->result());
 
 		if($this->form_validation->run()==False){
 			if($cek<1){
 				$data = ['nama_pakaian'=>$nama];
-				$this->model->update($this->table, 'nama_pakaian', $oldNama, $data);
+				$this->Model->update($this->table, 'nama_pakaian', $oldNama, $data);
 				$this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert">Data berhasil di ubah.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 				redirect('admin/pakaian');
 			}else{

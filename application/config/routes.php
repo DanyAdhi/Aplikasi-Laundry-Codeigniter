@@ -53,9 +53,11 @@ $route['default_controller'] = 'UserController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['tarif'] 	= "UserController/listHarga";
-$route['cari'] 		= "UserController/lacak";
-$route['kontak'] 	= "UserController/kontak";
 
 // ADMIN
 $route['admin'] 	= "admin/login";
+
+
+$route['tarif'] 	= "UserController/listHarga";
+$route['cari'] 		= "UserController/lacak";
+$route['kontak'] 	= "UserController/kontak";

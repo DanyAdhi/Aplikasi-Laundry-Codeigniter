@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			if($this->session->userdata('masuk') !=TRUE){
 	            redirect(base_url('')); 
 	        };
-			$this->load->model(['model']);
+			$this->load->model(['Model']);
 		}
 
 
@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$data = [
 						'content'	=> $this->folder.('proses'),
 						'section'	=> 'Proses Laundry',
-						'tampil'	=> $this->model->proses()
+						'tampil'	=> $this->Model->proses()
 					];
 
 			$this->load->view('template/template', $data);
@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$data = [
 						'content'	=> $this->folder.('selesai'),
 						'section'	=> 'Transaksi Selesai',
-						'tampil'	=> $this->model->get_by($this->table, 'status', 1)->result()
+						'tampil'	=> $this->Model->get_by($this->table, 'status', 1)->result()
 					];
 
 			$this->load->view('template/template', $data);
@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 						'kering' => '1' ,
 					];
 
-			$this->model->update('transaksi_status','id_transaksi_s',$where, $data);
+			$this->Model->update('transaksi_status','id_transaksi_s',$where, $data);
 			redirect('admin/status/proses');
 		}
 
@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 						'strika' => '1' ,
 					];
 
-			$this->model->update('transaksi_status','id_transaksi_s',$where, $data);
+			$this->Model->update('transaksi_status','id_transaksi_s',$where, $data);
 			redirect('admin/status/proses');
 		}
 
@@ -67,7 +67,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 						'siap' => '1' ,
 					];
 
-			$this->model->update('transaksi_status','id_transaksi_s',$where, $data);
+			$this->Model->update('transaksi_status','id_transaksi_s',$where, $data);
 			redirect('admin/status/proses');
 		}
 
@@ -82,13 +82,13 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 					];
 
 			// save status
-			$this->model->update('transaksi_status','id_transaksi_s',$where, $data);
+			$this->Model->update('transaksi_status','id_transaksi_s',$where, $data);
 
 			// save transaksi selesai
 			$dati = [
 						'status' 	=> 1
 					];
-			$this->model->update($this->table, 'id_transaksi', $where, $dati);
+			$this->Model->update($this->table, 'id_transaksi', $where, $dati);
 			redirect('admin/status/proses');
 		}
 	}

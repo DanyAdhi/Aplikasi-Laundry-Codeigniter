@@ -10,8 +10,8 @@ class Auth extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('model');
-		$this->load->model('validation', 'val');
+		$this->load->model('Model');
+		$this->load->model('Validation', 'val');
 		$this->load->library('form_validation');
 	}
 
@@ -22,7 +22,7 @@ class Auth extends CI_Controller {
 		$post 	= $this->input->post();
 		$user 	= $post['username'];
 		$pass	= $post['password'];
-		$cek 	= $this->model->get_by($this->table, 'username' ,$user)->row_array();
+		$cek 	= $this->Model->get_by($this->table, 'username' ,$user)->row_array();
 		$validasi = $this->form_validation->set_rules($this->val->val_login());
 		
 		if($validasi->run()==false)

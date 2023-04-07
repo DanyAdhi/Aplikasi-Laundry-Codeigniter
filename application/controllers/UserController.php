@@ -8,7 +8,7 @@ class UserController extends CI_Controller {
 
 	function __construct(){
 		parent::__construct();
-		$this->load->model(['model', 'validation']);
+		$this->load->model(['Model', 'Validation']);
 		$this->load->library(['form_validation']);
 	}
 
@@ -21,7 +21,7 @@ class UserController extends CI_Controller {
 	public function listHarga(){
 		$data = [
 			'content'	=> $this->folder.('tarif'),
-			'data'		=> $this->model->get_all('tarif')->result()
+			'data'		=> $this->Model->get_all('tarif')->result()
 		];
 		$this->load->view($this->layout, $data);
 	}
@@ -35,7 +35,7 @@ class UserController extends CI_Controller {
 				'id'		=> ''
 			];
 		}else{
-			$cek = $this->model->get_by('transaksi_status', 'id_transaksi_s', $id)->result_array();
+			$cek = $this->Model->get_by('transaksi_status', 'id_transaksi_s', $id)->result_array();
 			$jum =count($cek);
 
 			if($jum<1){

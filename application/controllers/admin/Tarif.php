@@ -17,7 +17,7 @@ class Tarif extends CI_Controller{
 		if($this->session->userdata('masuk') !=TRUE){
             redirect(base_url('')); 
         };
-		$this->load->model(['model','validation']);
+		$this->load->model(['Model','Validation']);
 		$this->load->library(['form_validation', 'encryption']);
 
 	}
@@ -26,7 +26,7 @@ class Tarif extends CI_Controller{
 	{
 		$data = ['content'	=> $this->folder.('view'),
 				 'section'	=> $this->section,
-				 'tampil'	=> $this->model->get_all($this->table)->result()
+				 'tampil'	=> $this->Model->get_all($this->table)->result()
 				 ];
 
 		$this->load->view('template/template', $data);
@@ -44,7 +44,7 @@ class Tarif extends CI_Controller{
 	public function save()
 	{
 		$post 		= $this->input->post();
-		$validasi 	= $this->form_validation->set_rules($this->validation->val_tarif());
+		$validasi 	= $this->form_validation->set_rules($this->Validation->val_tarif());
 
 		if($validasi->run()==True){
 			$data = [
@@ -54,7 +54,7 @@ class Tarif extends CI_Controller{
 						'biaya_tarif'	=> $post['biaya'],
 						'jenis_tarif'	=> $post['jenis']
 					];
-			$this->model->save($this->table, $data);
+			$this->Model->save($this->table, $data);
 			$this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert">Data berhasil di simpan.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 			redirect('admin/tarif/add');
 		}else{
@@ -69,7 +69,7 @@ class Tarif extends CI_Controller{
 		if(!isset($id)) show_404();
 		$id = str_replace(['-','_','~'],['=','+','/'],$id);
 		$id = $this->encryption->decrypt($id);
-		$this->model->delete($this->table, 'id_tarif' , $id);
+		$this->Model->delete($this->table, 'id_tarif' , $id);
 		$this->session->set_flashdata('flash', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Data telah di hapus.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 		redirect('admin/tarif');
 	}
@@ -83,7 +83,7 @@ class Tarif extends CI_Controller{
 		$data = [
 					'content'	=> $this->folder.('edit'),
 				 	'section'	=> $this->section,
-				 	'tampil'	=> $this->model->get_by($this->table, 'id_tarif', $id)->result()
+				 	'tampil'	=> $this->Model->get_by($this->table, 'id_tarif', $id)->result()
 				];
 
 		$this->load->view('template/template', $data);
@@ -92,8 +92,8 @@ class Tarif extends CI_Controller{
 	public function update()
 	{
 
-		$cek 	= $this->model->get_by($this->table, 'nama_tarif', $this->input->post('oldNama'))->result_array();
-		$jum 	= count($this->model->get_by($this->table, 'nama_tarif', $this->input->post('nama'))->result_array());
+		$cek 	= $this->Model->get_by($this->table, 'nama_tarif', $this->input->post('oldNama'))->result_array();
+		$jum 	= count($this->Model->get_by($this->table, 'nama_tarif', $this->input->post('nama'))->result_array());
 		$id 	= $cek[0]['id_tarif'];
 		$post 	= $this->input->post();
 		$nama 	= $post['nama'];
@@ -112,7 +112,7 @@ class Tarif extends CI_Controller{
 						'biaya_tarif'	=> $post['biaya'],
 						'jenis_tarif'	=> $post['jenis']
 					];
-				$this->model->update($this->table, 'id_tarif', $id, $data);
+				$this->Model->update($this->table, 'id_tarif', $id, $data);
 				$this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert">Data berhasil di Ubah.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 				redirect('admin/tarif');
 			}else{
@@ -123,14 +123,14 @@ class Tarif extends CI_Controller{
 							'biaya_tarif'	=> $post['biaya'],
 							'jenis_tarif'	=> $post['jenis']
 						];
-					$this->model->update($this->table, 'id_tarif', $id, $data);
+					$this->Model->update($this->table, 'id_tarif', $id, $data);
 					$this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert">Data berhasil di Ubah.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 					redirect('admin/tarif');
 				}else{
 					$data = [
 							'content'	=> $this->folder.('edit'),
 						 	'section'	=> $this->section,
-						 	'tampil'	=> $this->model->get_by($this->table, 'id_tarif', $id)->result()
+						 	'tampil'	=> $this->Model->get_by($this->table, 'id_tarif', $id)->result()
 							];
 					$this->session->set_flashdata('flash','<div class="alert alert-danger alert-dismissible fade show" role="alert"><b>Gagal!</b> Nama Tarif sudah ada.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 					$this->load->view('template/template', $data);
@@ -143,7 +143,7 @@ class Tarif extends CI_Controller{
 			$data = [
 					'content'	=> $this->folder.('edit'),
 				 	'section'	=> $this->section,
-				 	'tampil'	=> $this->model->get_by($this->table, 'id_tarif', $id)->result()
+				 	'tampil'	=> $this->Model->get_by($this->table, 'id_tarif', $id)->result()
 					];
 			$this->load->view('template/template', $data);
 
