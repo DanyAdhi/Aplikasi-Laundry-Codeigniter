@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		function __construct(){
 			parent::__construct();
-			if($this->session->userdata('masuk') !=TRUE){
+			if ($this->session->userdata('masuk') != TRUE) {
 	            redirect(base_url('')); 
 	        };
 		}

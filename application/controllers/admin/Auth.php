@@ -16,51 +16,56 @@ class Auth extends CI_Controller {
 	}
 
 
-	public function login()
-	{
+	public function login() {
 
-		$post 	= $this->input->post();
-		$user 	= $post['username'];
-		$pass	= $post['password'];
-		$cek 	= $this->Model->get_by($this->table, 'username' ,$user)->row_array();
+		$post 		= $this->input->post();
+		$user 		= $post['username'];
+		$pass			= $post['password'];
 		$validasi = $this->form_validation->set_rules($this->val->val_login());
 		
-		if($validasi->run()==false)
-		{
-			$data = ['content' 	=> 'admin/login',
-					 'section'	=> $this->section,
-					];
+		if ($validasi->run() == false) {
+			$data = [
+				'content' 	=> 'admin/login',
+				'section'	=> $this->section,
+			];
 			$this->load->view('template/login', $data);
-		}else{
-			if($cek){
-				if(password_verify($pass, $cek['password'])){
-					$data = [
-							'masuk'		=>true,
-							'username'	=>$cek['username'],
-							'nama'		=>$cek['nama'],
-							'level'		=>$cek['level']
-							];
-					$this->session->set_userdata($data);
-					redirect('admin/dashboard');
-				}else{
-					$data = ['content' 	=> 'admin/login',
-							 'section'	=> $this->section,
-							];
-					$this->session->set_flashdata('flash','<div class="alert alert-danger" role="alert">Password yang anda masukkan salah! </div>' );
-					$this->load->view('template/login', $data);
-				}
-			}else{
-				$data = ['content' 	=> 'admin/login',
-						 'section'	=> $this->section,
-						];
-				$this->session->set_flashdata('flash','<div class="alert alert-danger" role="alert">Username tidak ada! </div>' );
+		}
+
+		// get user by username
+		$get_user = $this->Model->get_by($this->table, 'username' ,$user)->row_array();
+		if ($get_user == NULL) {
+			$data = [
+				'content' 	=> 'admin/login',
+				'section'		=> $this->section,
+			];
+			$this->session->set_flashdata('flash','<div class="alert alert-danger" role="alert">Username tidak ada! </div>' );
+			$this->load->view('template/login', $data);
+
+		} else {
+			$verify_password = password_verify($pass, $get_user['password']);
+			
+			if (!$verify_password) {
+				$data = [
+					'content' 	=> 'admin/login',
+					'section'	=> $this->section,
+				];
+				$this->session->set_flashdata('flash','<div class="alert alert-danger" role="alert">Password yang anda masukkan salah! </div>' );
 				$this->load->view('template/login', $data);
+			} else {
+				$data = [
+					'masuk'			=> true,
+					'username'	=> $get_user['username'],
+					'nama'			=> $get_user['nama'],
+					'level'			=> $get_user['level']
+				];
+				$this->session->set_userdata($data);
+				redirect('admin/dashboard');	
 			}
-		};
+		}
+
 	}
 
-	public function logout()
-	{
+	public function logout() {
 		session_destroy();
 		redirect('admin/login');
 	}

@@ -1,7 +1,6 @@
 <?php include('header.php');
-
-$hal    = $this->uri->segment(2);
-$aktif  = 'active';
+  $hal    = $this->uri->segment(2);
+  $aktif  = 'active';
 ?>
 
 
@@ -36,11 +35,14 @@ $aktif  = 'active';
           <i class="fas fa-fw fa-male"></i>
           <span>Data Pakaian</span></a>
       </li>
-      <li class="nav-item <?=($hal=='tarif')?$aktif:''; ?>">
-        <a class="nav-link" href="<?=base_url('admin/tarif') ?>">
-          <i class="fas fa-fw fa-dollar-sign"></i>
-          <span>Tarif</span></a>
-      </li>
+      <?php if ($this->session->userdata('level') == 1 ) : ?>
+        <li class="nav-item <?=($hal=='tarif')?$aktif:''; ?>">
+          <a class="nav-link" href="<?=base_url('admin/tarif') ?>">
+            <i class="fas fa-fw fa-dollar-sign"></i>
+            <span>Tarif</span></a>
+        </li>
+      <?php endif ?>
+
       <li class="nav-item <?=($hal=='transaksi')?$aktif:''; ?>">
         <a class="nav-link" href="<?=base_url('admin/transaksi') ?>">
           <i class="fas fa-fw fa-handshake"></i>
@@ -63,11 +65,13 @@ $aktif  = 'active';
           <i class="fas fa-fw fa-file-alt"></i>
           <span>Laporan</span></a>
       </li>
+      <?php if ($this->session->userdata('level') == 1 ) : ?>
       <li class="nav-item <?=($hal=='user')?$aktif:'';?>">
         <a class="nav-link" href="<?=base_url('admin/user') ?>">
           <i class="fas fa-fw fa-user"></i>
           <span>User</span></a>
       </li>
+      <?php endif ?>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
