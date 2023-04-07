@@ -12,13 +12,12 @@ class UserController extends CI_Controller {
 		$this->load->library(['form_validation']);
 	}
 
-	public function index()
-	{
+	public function index() {
 		$data = ['content'=> $this->folder.('home')];
 		$this->load->view($this->layout, $data);
 	}
 
-	public function listHarga(){
+	public function listHarga() {
 		$data = [
 			'content'	=> $this->folder.('tarif'),
 			'data'		=> $this->Model->get_all('tarif')->result()
@@ -26,36 +25,39 @@ class UserController extends CI_Controller {
 		$this->load->view($this->layout, $data);
 	}
 
-	public function lacak($id=null){
+	public function lacak($id=null) {
 		$id = $this->input->get('idOrder');
-		if(!$id){
+
+		if (!$id) {
 			$data = [
 				'content'	=> $this->folder.('lacak'),
 				'tampil' 	=> null,
-				'id'		=> ''
+				'id'			=> ''
 			];
-		}else{
-			$cek = $this->Model->get_by('transaksi_status', 'id_transaksi_s', $id)->result_array();
-			$jum =count($cek);
 
-			if($jum<1){
+		} else {
+			$cek = $this->Model->find_transaction_by_idTransaction($id);
+			$jum = count($cek);
+
+			if ($jum < 1) {
 				$data = [
 					'content'	=> $this->folder.('lacak'),
 					'tampil'	=> 'noData',
-					'id'		=> $id
+					'id'			=> $id
 				];
-			}else{
+			} else {
 				$data = [
 					'content'	=> $this->folder.('lacak'),
 					'tampil' 	=> 1,
 					'data'		=> $cek,
-					'id'		=> $id
+					'id'			=> $id
 				];
 			}
 		}
 		$this->load->view($this->layout, $data);
 	}
-	public function kontak(){
+
+	public function kontak() {
 		$data = ['content'=> $this->folder.('contact')];
 		$this->load->view($this->layout, $data);
 	}

@@ -116,7 +116,24 @@
                         <li class="<?=($data[0]['siap']=='1')?'active':'';?>">Siap diambil</li>
                         <li class="<?=($data[0]['selesai']=='1')?'active':'';?>">Selesai</li>
                       </ul>
-                    </div>  
+                    </div> 
+                    <table class='table table-responseive table-borderless mt-4'>
+                      <tr>
+                        <td width='150px'>Nama</td>
+                        <td width='10px'>:</td>
+                        <td class='font-weight-bold'> <?=$data[0]['nama']?></td>
+                      </tr>
+                      <tr>
+                        <td>Tanggal Transaksi</td>
+                        <td>:</td>
+                        <td class='font-weight-bold'> <?=$data[0]['tgl_transaksi']?></td>
+                      </tr>
+                      <tr>
+                        <td>Jam Transaksi</td>
+                        <td>:</td>
+                        <td class='font-weight-bold'> <?=$data[0]['jam_transaksi']?></td>
+                      </tr>
+                    </table> 
                   </section>
             <?php endif; ?>
           </div>
@@ -132,6 +149,7 @@
 <script>
   function inputAngka(evt){
       var charCode = (evt.charCode);
-      if(charCode>31 && (charCode<48 || charCode>57) && charCode!=45) { return false; } else { return true; }
+      if (charCode > 31 &&  (charCode < 48 || charCode > 57) && charCode != 45) return false;  
+      return true;
   }
 </script>
