@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			if($this->session->userdata('masuk') !=TRUE){
 	            redirect(base_url('')); 
 	        };
-			$this->load->model(['model','validation']);
+			$this->load->model(['Model','Validation']);
 			$this->load->library(['form_validation','encryption']);
 		}
 
@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		{
 			$data = ['content'	=> $this->folder.('view'),
 					 'section'	=> $this->section,
-					 'tampil'	=> $this->model->get_all($this->table)->result()];
+					 'tampil'	=> $this->Model->get_all($this->table)->result()];
 			$this->load->view('template/template', $data);
 		}
 
@@ -35,7 +35,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		public function save()
 		{
 			$post		= $this->input->post();
-			$validasi 	= $this->form_validation->set_rules($this->validation->val_user());
+			$validasi 	= $this->form_validation->set_rules($this->Validation->val_user());
 			if($validasi->run()==false)
 			{
 				$data = ['content'	=> $this->folder.('post'),
@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 							'password'	=> password_hash($post['password1'], PASSWORD_DEFAULT),
 							'level'		=> $post['level']
 						];
-				$this->model->save($this->table, $data);
+				$this->Model->save($this->table, $data);
 				$this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert">Data berhasil di simpan.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 				redirect('admin/user/add');
 			}
@@ -63,7 +63,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$id=str_replace(['-','_','~',],['=','+','/'], $id);
 			$id=$this->encryption->decrypt($id);
 
-			$this->model->reset_pass($this->table, 'id', $id, 'password');
+			$this->Model->reset_pass($this->table, 'id', $id, 'password');
 			$this->session->set_flashdata('flash','<div class="alert alert-success alert-dismissible fade show" role="alert"><b>Password</b> berhasil di reset.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 			redirect('admin/user');
 
@@ -75,7 +75,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 			$id=str_replace(['-','_','~'],['=','+','/'],$id);
 			$id=$this->encryption->decrypt($id);
 
-			$this->model->delete($this->table,'id',$id);
+			$this->Model->delete($this->table,'id',$id);
 			$this->session->set_flashdata('flash', '<div class="alert alert-success alert-dismissible fade show" role="alert">Data berhasil di hapus.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 			redirect('admin/user');
 		}

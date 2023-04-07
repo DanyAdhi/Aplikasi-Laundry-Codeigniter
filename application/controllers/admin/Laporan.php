@@ -13,7 +13,7 @@ class Laporan extends CI_Controller {
 		if($this->session->userdata('masuk') !=TRUE){
             redirect(base_url('')); 
         };
-		$this->load->model(['model']);
+		$this->load->model(['Model']);
 	}
 
 
@@ -22,7 +22,7 @@ class Laporan extends CI_Controller {
 		$data = [
 					'content'	=> $this->folder.'coba',
 					'section'	=> $this->section,
-					'tampil'	=> $this->model->get_all($this->table)->result()
+					'tampil'	=> $this->Model->get_all($this->table)->result()
 				];
 		$this->load->view('template/template', $data);
 	}
