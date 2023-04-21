@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <!-- Page Heading -->
   <h1 class="h3 mb-5 text-gray-800">Overview Data <?=$section?></h1>
-<?=$this->session->flashdata('flash') ?>
+  <?=$this->session->flashdata('flash') ?>
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex">
@@ -24,18 +24,20 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($tampil as $t){ 
-              $id = str_replace(['=','+','/'],['-','_','~',], $this->encryption->encrypt($t->id));
-              ?>
+            <?php 
+              foreach ($users as $data):
+              $id = str_replace(['=','+','/'],['-','_','~',], $this->encryption->encrypt($data->id));
+            ?>
             <tr>
-              <td><?=$t->nama ?></td>
-              <td><?=$t->username ?></td>
-              <td><?php if($t->level!='1'){echo 'Karyawan';}else{echo 'Admin';} ?></td>
-              <td><a href="<?=base_url('admin/user/reset/'.$id) ?>" class="btn btn-sm btn-info" title="Reset Password">Reset</a>
-                  <a href="" onclick="deleteConfirm('<?=base_url('admin/user/delete/'.$id)?>')" class="btn btn-sm btn-danger" title="Hapus Data" data-target="#deleteModal" data-toggle="modal">Hapus</a>
+              <td><?=$data->name ?></td>
+              <td><?=$data->username ?></td>
+              <td><?=ucfirst($data->scope) ?></td>
+              <td>
+                <a href="<?=base_url('admin/user/reset/'.$id) ?>" class="btn btn-sm btn-info" title="Reset Password">Reset</a>
+                <a href="" onclick="deleteConfirm('<?=base_url('admin/user/delete/'.$id)?>')" class="btn btn-sm btn-danger" title="Hapus Data" data-target="#deleteModal" data-toggle="modal">Hapus</a>
               </td>
             </tr>
-          <?php } ?>
+          <?php endforeach; ?>
           </tbody>
         </table>
       </div>

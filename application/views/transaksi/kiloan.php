@@ -24,39 +24,39 @@
               </tr>
             </thead>
 
+            <tbody>
               <?php 
                 $no=1;
                 foreach ($this->cart->contents() as $items): 
               ?>
-            <tbody>
               <tr>
-                  <td align="center"><?=$no ?></td>
-                  <td><?=$items['name'];?></td>
+                  <td align="center">  <?=$no ?> </td>
+                  <td> <?=$items['name'];?> </td>
                   <td style="text-align:center;"> <?php echo number_format($items['qty']);?></td>   
                   <td style="text-align:center;"><a href="<?php echo base_url().'admin/transaksi/remove_kiloan/'.$items['rowid'];?>" class="btn btn-danger btn-md"> Batal</a></td>
               </tr>
-            </tbody>      
               <?php 
                 $no++;
                 endforeach; 
               ?>
+            </tbody>      
           </table>
           <form method="POST" action="save_kiloan">
             <table class="mt-5">
               <tr>
                 <td>Nama</td>
                 <td>
-                  <input type="text" name="nama" class="form-control form-control-sm ml-3" value="<?=set_value('nama')?>"> 
-                  <?=form_error('nama', "<small class='text-danger ml-3'>",'</small>') ?>
+                  <input type="text" name="name" class="form-control form-control-sm ml-3" value="<?=set_value('name')?>"> 
+                  <?=form_error('name', "<small class='text-danger ml-3'>",'</small>') ?>
                 </td>
               </tr>
               <tr>
                 <td>Paket</td>
                 <td>
-                  <select class="custom-select my-2 ml-3" name="paket" id="paket">
-                    <?php foreach ($tarif as $tr) {?>
-                      <option value="<?=$tr->nama_tarif.' ('.$tr->biaya_tarif?>">
-                        <?=$tr->nama_tarif.' ('.$tr->biaya_tarif.')' ?>
+                  <select class="custom-select my-2 ml-3" name="package" id="paket">
+                    <?php foreach ($packages as $data) {?>
+                      <option value="<?=$data->name.' ('.$data->amount?>">
+                        <?=$data->name.' ('.$data->amount.')' ?>
                       </option>  
                     <?php } ?>
                   </select>
@@ -65,13 +65,15 @@
               <tr>
                 <td>Berat</td>
                 <td>
-                  <input type="text" name="berat" class="form-control form-control-sm  ml-3" id="berat" value="<?=set_value('berat')?>">
-                  <?=form_error('berat', "<small class='text-danger ml-3'>",'</small>') ?>
+                  <input type="text" name="amount" class="form-control form-control-sm  ml-3" id="berat" value="<?=set_value('amount')?>">
+                  <?=form_error('amount', "<small class='text-danger ml-3'>",'</small>') ?>
                 </td>
               </tr>
               <tr>
                 <td>Total bayar</td>
-                <td><input type="text" name="total" class="form-control form-control-sm my-2 ml-3" id="total" value="<?=set_value('total')?>"></td>
+                <td>
+                  <input type="text" name="amount_transaction" class="form-control form-control-sm my-2 ml-3" id="total" value="<?=set_value('amount_transaction')?>">
+                </td>
               </tr>
               <tr>
                 <td></td>
@@ -112,17 +114,17 @@
             <tbody>
               <?php
                 $no=1;
-                foreach($tampil as $t){ 
-                $id = $t->id_pakaian; 
+                foreach($clothes as $data){ 
+                $id = $data->id; 
               ?>
               <tr>
-                <td align="center"><?=$no ?></td>
-                <td><?=$t->nama_pakaian ?></td>
+                <td align="center"> <?=$no?> </td>
+                <td> <?=$data->name?> </td>
 
                   <form method="POST" action="<?=base_url('admin/transaksi/add_cart_kiloan') ?>">
                 <td><input type="number" name="jumlah" class="form-control form-contrl-sm" style="width:70px" value="1"></td>
                 <td align="center">
-                    <input type="hidden" name="id" value="<?=$t->id_pakaian ?>">
+                    <input type="hidden" name="id" value="<?=$data->id ?>">
                     <button href="" class="btn btn-sm btn-danger" title="Hapus" >Pilih</button>
                   </form>
                 </td>

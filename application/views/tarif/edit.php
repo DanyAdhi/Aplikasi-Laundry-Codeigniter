@@ -11,36 +11,43 @@
               <h1 class="h4 text-gray-900 mb-4 font-weight-bold">Input Data <?=$section ?></h1>
             </div>
             <form class="user" method="POST" action="<?=base_url('admin/tarif/update')?>">
-              <?php foreach ($tampil as $t): ?>
+              <?php 
+                foreach ($price as $data): 
+                $id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($data->id));
+              ?>
+                <input type="hidden" name="id" value="<?=$id?>">
                 
-              <div class="form-group mb-3">
-                <label class="text-dark">Nama Tarif</label>
-                <input type="text" class="form-control" placeholder="Nama Tarif..." name="nama" value="<?=set_value('nama', $t->nama_tarif) ?>">
-                <input type="hidden" name="oldNama" value="<?=$t->nama_tarif?>">
-                <?=form_error('nama', "<small class='text-danger'>",'</small>') ?>
-              </div>
-              <div class="form-group mb-3">
-                <label class="text-dark">Waktu Proses</label>
-                <input type="text" class="form-control" placeholder="Lama Waktu Proses..." name="waktu" value="<?=set_value('waktu',$t->waktu_tarif) ?>">
-                <?=form_error('waktu',"<small class='text-danger'>",'</small>') ?>
-              </div>
-              <div class="form-group row pb-3">
-                <div class="col-sm-6 ">
-                  <label class="text-dark">Biaya</label>
-                  <input type="text" class="form-control" placeholder="Biaya.." name="biaya" onkeypress="return inputAngka(event)" value="<?=set_value('biaya',$t->biaya_tarif) ?>">
-                   <?=form_error('biaya',"<small class='text-danger'>",'</small>') ?> 
+                <div class="form-group mb-3">
+                  <label class="text-dark">Nama Tarif</label>
+                  <input type="text" class="form-control" placeholder="Nama Tarif..." name="name" value="<?=set_value('name', $data->name) ?>">
+                  <?=form_error('name', "<small class='text-danger'>",'</small>') ?>
                 </div>
-                <div class="col-sm-6">
-                  <label class="text-dark">Jenis</label>
-                  <select class="form-control text-dark" name="jenis">
-                    <option value="Kg" <?=($t->jenis_tarif=='Kg')?'selected':'' ?> <?=set_select('jenis', 'Kg') ?> >Kg</option>
-                    <option value="Satuan" <?=set_select('jenis', 'Satuan')?>  <?=($t->jenis_tarif=='Satuan')?'selected':'' ?>>Satuan</option>
-                  </select>
+                <div class="form-group mb-3">
+                  <label class="text-dark">Waktu Proses</label>
+                  <input type="text" class="form-control" placeholder="Lama Waktu Proses..." name="time" value="<?=set_value('time',$data->time) ?>">
+                  <?=form_error('time',"<small class='text-danger'>",'</small>') ?>
                 </div>
-              </div>
-              <hr>
-              <div class="d-flex">
-              <button type="submit" class="btn btn-primary mr-3">Simpan</button>
+                <div class="form-group row pb-3">
+                  <div class="col-sm-6 ">
+                    <label class="text-dark">Biaya</label>
+                    <input type="text" class="form-control" placeholder="Biaya.." name="amount" onkeypress="return inputAngka(event)" value="<?=set_value('amount',$data->amount) ?>">
+                    <?=form_error('amount',"<small class='text-danger'>",'</small>') ?> 
+                  </div>
+                  <div class="col-sm-6">
+                    <label class="text-dark">Jenis</label>
+                    <select class="form-control text-dark" name="type">
+                      <option value="Kg" <?= ($data->type=='Kg') ? 'selected':'' ?> <?= set_select('type', 'Kg') ?> >
+                        Kg
+                      </option>
+                      <option value="Satuan" <?= ($data->type == 'Satuan') ? 'selected':'' ?> <?= set_select('type', 'Satuan')?> >
+                        Satuan
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <hr>
+                <div class="d-flex">
+                <button type="submit" class="btn btn-primary mr-3">Simpan</button>
               <?php endforeach ?>
             </form>        
             <a href="<?=base_url('admin/tarif') ?>" class="btn btn-secondary">Kembali</a>
@@ -54,17 +61,10 @@
 </div>
 
 <script>
-  function inputAngka(evt){
+  function inputAngka(evt) {
       var charCode = (evt.charCode);
-      // console.log(charCode)
       // jika charCode lebih dari 31(spasi) dan carCode kurang dari 48 atau charCode besar dari 57
-      if(charCode>32 && (charCode<48 || charCode>57) && charCode!=45)
-      {
-        return false;
-      }
-      else
-      {
-        return true;
-      }
+      if ( charCode > 32 && (charCode < 48 || charCode > 57) && charCode != 45 ) return false;
+      return true;
   }
 </script>

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <!-- Page Heading -->
   <h1 class="h3 mb-5 text-gray-800">Overview Data <?=$section?></h1>
-<?=$this->session->flashdata('flash') ?>
+  <?=$this->session->flashdata('flash') ?>
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex">
@@ -25,16 +25,21 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($tampil as $t){ 
-              $id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($t->id_tarif));
-              ?>
+            <?php foreach($prices as $data){ 
+              $id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($data->id));
+            ?>
             <tr>
-              <td><?=$t->nama_tarif ?></td>
-              <td><?=$t->waktu_tarif ?></td>
-              <td><?=$t->biaya_tarif ?></td>
-              <td><?=$t->jenis_tarif ?></td>
-              <td><a href="<?=base_url('admin/tarif/edit/'.$id) ?>" class="btn btn-sm btn-warning" title="Edit">Edit</a>
-                  <button href="" onclick="deleteConfirm('<?=base_url('admin/tarif/delete/'.$id) ?>')" class="btn btn-sm btn-danger" title="Hapus" data-target="#modalDelete" data-toggle="modal">Hapus</button>
+              <td> <?= $data->name ?> </td>
+              <td> <?= $data->time ?> </td>
+              <td> <?= $data->amount ?> </td>
+              <td> <?= $data->type ?> </td>
+              <td width="120px">  
+                  <a href="<?=base_url('admin/tarif/edit/'.$id) ?>" class="btn btn-sm btn-warning d-line" title="Edit"> 
+                    Edit 
+                  </a>
+                  <button href="" onclick="deleteConfirm('<?=base_url('admin/tarif/delete/'.$id) ?>')" class="btn btn-sm btn-danger" title="Hapus" data-target="#modalDelete" data-toggle="modal"> 
+                    Hapus 
+                  </button>
               </td>
             </tr>
           <?php } ?>
@@ -60,8 +65,8 @@
         Anda Yakin ingin Menghapus Data?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-        <a type="button" class="btn btn-danger" id="hapus">Hapus</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Batal </button>
+        <a type="button" class="btn btn-danger" id="hapus"> Hapus </a>
       </div>
     </div>
   </div>
@@ -70,10 +75,8 @@
 
 
 <script>
-  function deleteConfirm(url)
-  {
+  function deleteConfirm(url) {
     $('#hapus').attr('href',url);
     $('#modalDelete').modal();
   }
-
 </script>
