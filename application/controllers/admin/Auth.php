@@ -4,14 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Auth extends CI_Controller {
 
 
-	var $table 		= 'user';
+	var $table 		= 'users';
 	var $section 	= 'Login';
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Model');
-		$this->load->model('Validation', 'val');
+		$this->load->model(['Validation', 'Model']);
 		$this->load->library('form_validation');
 	}
 
@@ -21,7 +20,7 @@ class Auth extends CI_Controller {
 		$post 		= $this->input->post();
 		$user 		= $post['username'];
 		$pass			= $post['password'];
-		$validasi = $this->form_validation->set_rules($this->val->val_login());
+		$validasi = $this->form_validation->set_rules($this->Validation->val_login());
 		
 		if ($validasi->run() == false) {
 			$data = [
@@ -55,8 +54,8 @@ class Auth extends CI_Controller {
 				$data = [
 					'masuk'			=> true,
 					'username'	=> $get_user['username'],
-					'nama'			=> $get_user['nama'],
-					'level'			=> $get_user['level']
+					'name'			=> $get_user['name'],
+					'scope'			=> $get_user['scope']
 				];
 				$this->session->set_userdata($data);
 				redirect('admin/dashboard');	

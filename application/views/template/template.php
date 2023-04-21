@@ -1,6 +1,6 @@
 <?php include('header.php');
-  $hal    = $this->uri->segment(2);
-  $aktif  = 'active';
+  $page    = $this->uri->segment(2);
+  $active  = 'active';
 ?>
 
 
@@ -14,7 +14,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -25,30 +25,30 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item <?=($hal=='dashboard')?$aktif:''; ?>">
+      <li class="nav-item <?= ($page=='dashboard') ? $active : ''; ?>">
         <a class="nav-link" href="<?=base_url('admin/dashboard')?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-      <li class="nav-item <?=($hal=='pakaian')?$aktif:''; ?>">
+      <li class="nav-item <?= ($page=='pakaian') ? $active : ''; ?>">
         <a class="nav-link" href="<?=base_url('admin/pakaian')?>">
           <i class="fas fa-fw fa-male"></i>
           <span>Data Pakaian</span></a>
       </li>
-      <?php if ($this->session->userdata('level') == 1 ) : ?>
-        <li class="nav-item <?=($hal=='tarif')?$aktif:''; ?>">
+      <?php if ($this->session->userdata('scope') == 'admin' ) : ?>
+        <li class="nav-item <?= ($page=='tarif') ? $active : ''; ?>">
           <a class="nav-link" href="<?=base_url('admin/tarif') ?>">
             <i class="fas fa-fw fa-dollar-sign"></i>
             <span>Tarif</span></a>
         </li>
       <?php endif ?>
 
-      <li class="nav-item <?=($hal=='transaksi')?$aktif:''; ?>">
+      <li class="nav-item <?= ($page=='transaksi') ? $active : ''; ?>">
         <a class="nav-link" href="<?=base_url('admin/transaksi') ?>">
           <i class="fas fa-fw fa-handshake"></i>
           <span>Transaksi Laundry</span></a>
       </li>
-      <li class="nav-item <?=($hal=='status')?$aktif:''; ?>" >
+      <li class="nav-item <?= ($page=='status') ? $active : ''; ?>" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-stream"></i>
           <span>Status Laundry</span>
@@ -60,13 +60,13 @@
           </div>
         </div>
       </li>
-      <li class="nav-item <?=($hal=='laporan')?$aktif:''; ?>">
+      <li class="nav-item <?= ($page=='laporan') ? $active : ''; ?>">
         <a class="nav-link" href="<?=base_url('admin/laporan') ?>">
           <i class="fas fa-fw fa-file-alt"></i>
           <span>Laporan</span></a>
       </li>
-      <?php if ($this->session->userdata('level') == 1 ) : ?>
-      <li class="nav-item <?=($hal=='user')?$aktif:'';?>">
+      <?php if ($this->session->userdata('scope') == 'admin' ) : ?>
+      <li class="nav-item <?= ($page=='user') ? $active : '';?>">
         <a class="nav-link" href="<?=base_url('admin/user') ?>">
           <i class="fas fa-fw fa-user"></i>
           <span>User</span></a>
@@ -105,7 +105,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Dany Adhi Prabowo</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$this->session->name?></span>
                 <img class="img-profile rounded-circle" src="<?=base_url('assets/img/admin.png')?>">
               </a>
               <!-- Dropdown - User Information -->

@@ -13,8 +13,8 @@
             <form class="user" method="POST" action="<?=base_url('admin/user/save')?>">
               <div class="form-group mb-3">
                 <label class="text-dark">Nama</label>
-                <input type="text" class="form-control" placeholder="Nama Lengkap..." name="nama" value="<?=set_value('nama') ?>">
-                <?=form_error('nama', "<small class='text-danger'>",'</small>') ?>
+                <input type="text" class="form-control" placeholder="Nama Lengkap..." name="name" value="<?=set_value('name') ?>">
+                <?=form_error('name', "<small class='text-danger'>",'</small>') ?>
               </div>
               <div class="form-group mb-3">
                 <label class="text-dark">Username</label>
@@ -24,22 +24,21 @@
               <div class="form-group row pb-3">
                 <div class="col-sm-6 ">
                   <label class="text-dark">Password</label>
-                  <input type="password" class="form-control" placeholder="Password.." name="password1">
-                   <?=form_error('password1',"<small class='text-danger'>",'</small>') ?> 
+                  <input type="password" class="form-control" placeholder="Password.." name="password">
+                   <?=form_error('password',"<small class='text-danger'>",'</small>') ?> 
                 </div>
                 <div class="col-sm-6">
                   <label class="text-dark">Ulangi Password</label>
-                  <input type="password" class="form-control" placeholder="Ulangi password.." name="password2">
+                  <input type="password" class="form-control" placeholder="Ulangi password.." name="confirm_password">
                 </div>
               </div>
               <div class="form-group">
                 <label class="text-dark">Level</label>
-                <select class="form-control text-dark" name="level">
-                  <option value="1" <?=set_select('level','1') ?> >Admin</option>
-                  <option value="2" <?=set_select('level','2') ?> >Karyawan</option>
+                <select class="form-control text-dark" name="scope">
+                  <option value="admin" <?=set_select('scope','admin') ?> >Admin</option>
+                  <option value="karyawan" <?=set_select('scope','karyawan') ?> >Karyawan</option>
                 </select>
               </div>
-
 
               <hr>
               <div class="d-flex">

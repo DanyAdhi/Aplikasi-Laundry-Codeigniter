@@ -50,15 +50,15 @@
               <tr>
                 <td>Nama</td>
                 <td class="mb-2">
-                  <input type="text" name="nama" class="form-control form-control-sm ml-3" value="<?=set_value('nama')?>">
-                  <?=form_error('nama', "<small class='text-danger ml-3'>",'</small>') ?>
+                  <input type="text" name="name" class="form-control form-control-sm ml-3" value="<?=set_value('name')?>">
+                  <?=form_error('name', "<small class='text-danger ml-3'>",'</small>') ?>
                 </td>
               </tr>
               <tr>
                 <td>Jumlah Barang</td>
                 <td>
-                  <input type="text" name="jumlah" class="form-control form-control-sm  ml-3" value="<?php echo number_format($this->cart->total_items());?>" readonly> 
-                  <?=form_error('jumlah', "<small class='text-danger ml-3'>",'</small>') ?>
+                  <input type="text" name="amount" class="form-control form-control-sm  ml-3" value="<?php echo number_format($this->cart->total_items());?>" readonly> 
+                  <?=form_error('amount', "<small class='text-danger ml-3'>",'</small>') ?>
                 </td>
               </tr>
               <tr>
@@ -104,17 +104,15 @@
             <tbody>
               <?php
                 $no=1;
-                foreach($tampil as $t){ 
-                $id = $t->id_tarif; 
+                foreach($packages as $data) { 
               ?>
               <tr>
-                <td align="center"><?=$no ?></td>
-                <td><?=$t->nama_tarif ?></td>
-
-                  <form method="POST" action="add_cart_satuan">
-                <td><input type="number" name="jumlah" class="form-control form-contrl-sm" style="width:70px" value="1"></td>
+                <td align="center"> <?=$no?> </td>
+                <td> <?=$data->name?> </td>
+                <form method="POST" action="add_cart_satuan">
+                <td> <input type="number" name="jumlah" class="form-control form-contrl-sm" style="width:70px" value="1"> </td>
                 <td align="center">
-                    <input type="hidden" name="id" value="<?=$id ?>">
+                    <input type="hidden" name="id" value="<?=$data->id?>">
                     <button href="" class="btn btn-sm btn-danger" title="Hapus" >Pilih</button>
                   </form>
                 </td>

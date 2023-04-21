@@ -13,25 +13,25 @@
             <form class="user" method="POST" action="<?=base_url('admin/tarif/save')?>">
               <div class="form-group mb-3">
                 <label class="text-dark">Nama Tarif</label>
-                <input type="text" class="form-control" placeholder="Nama Tarif..." name="nama" value="<?=set_value('nama') ?>">
-                <?=form_error('nama', "<small class='text-danger'>",'</small>') ?>
+                <input type="text" class="form-control" placeholder="Nama Tarif..." name="name" value="<?=set_value('name') ?>">
+                <?=form_error('name', "<small class='text-danger'>",'</small>') ?>
               </div>
               <div class="form-group mb-3">
                 <label class="text-dark">Waktu Proses</label>
-                <input type="text" class="form-control" placeholder="Lama Waktu Proses..." name="waktu" value="<?=set_value('waktu') ?>">
-                <?=form_error('waktu',"<small class='text-danger'>",'</small>') ?>
+                <input type="text" class="form-control" placeholder="Lama Waktu Proses..." name="time" value="<?=set_value('time') ?>">
+                <?=form_error('time',"<small class='text-danger'>",'</small>') ?>
               </div>
               <div class="form-group row pb-3">
                 <div class="col-sm-6 ">
                   <label class="text-dark">Biaya</label>
-                  <input type="text" class="form-control" placeholder="Biaya.." name="biaya" onkeypress="return inputAngka(event)" value="<?=set_value('biaya') ?>">
-                   <?=form_error('biaya',"<small class='text-danger'>",'</small>') ?> 
+                  <input type="text" class="form-control" placeholder="Biaya.." name="amount" onkeypress="return inputAngka(event)" value="<?=set_value('amount') ?>">
+                   <?=form_error('amount',"<small class='text-danger'>",'</small>') ?> 
                 </div>
                 <div class="col-sm-6">
                   <label class="text-dark">Jenis</label>
-                  <select class="form-control text-dark" name="jenis">
-                    <option value="Kg" <?=set_select('jenis','Kg') ?> >Kg</option>
-                    <option value="Satuan" <?=set_select('jenis','Satuan') ?> >Satuan</option>
+                  <select class="form-control text-dark" name="type">
+                    <option value="Kg" <?=set_select('type','Kg') ?> >Kg</option>
+                    <option value="Satuan" <?=set_select('type','Satuan') ?> >Satuan</option>
                   </select>
                 </div>
               </div>
@@ -52,15 +52,8 @@
 <script>
   function inputAngka(evt){
       var charCode = (evt.charCode);
-      // console.log(charCode)
       // jika charCode lebih dari 31(spasi) dan carCode kurang dari 48 atau charCode besar dari 57
-      if(charCode>32 && (charCode<48 || charCode>57) && charCode!=45)
-      {
-        return false;
-      }
-      else
-      {
-        return true;
-      }
+      if (charCode > 32 && (charCode < 48 || charCode > 57) && charCode != 45) return false;
+      return true;
   }
 </script>

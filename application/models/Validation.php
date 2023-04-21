@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit ('No script direct access allowed');
 		{
 			return [
 				[
-					'field'	=> 'nama',
+					'field'	=> 'name',
 					'label'	=> 'Nama',
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required'=>'Form <b>%s</b> tidak boleh kosong.']
@@ -37,39 +37,42 @@ defined('BASEPATH') OR exit ('No script direct access allowed');
 					'errors'=> ['required'=>'Form <b>%s</b> tidak boleh kosong.']
 				],
 				[
-					'field'	=> 'password1',
+					'field'	=> 'password',
 					'label'	=> 'Password',
-					'rules'	=> "required|rtrim|matches[password2]|min_length[4]",
-					'errors'=> ['required'	=> 'Form <b>%s</b> harus diisi',
-								'matches'	=> '<b>Password</b> tidak cocok',
-								'min_length'=> 'Pangjang <b>%s<b/> minimal 4 karakter'],
+					'rules'	=> "required|rtrim|matches[confirm_password]|min_length[4]",
+					'errors'=> [
+						'required'	=> 'Form <b>%s</b> harus diisi',
+						'matches'		=> '<b>Password</b> tidak cocok',
+						'min_length'=> 'Pangjang <b>%s<b/> minimal 4 karakter'
+					],
 				],
 				[
-					'field'	=> 'password2',
+					'field'	=> 'confirm_password',
 					'label'	=> 'Password',
 					'rules'	=> "required|rtrim",
 				]
 			];
 		}
 
-		public function val_tarif()
-		{
+		public function val_prices() {
 			return [
 				[
-					'field'	=> 'nama',
+					'field'	=> 'name',
 					'label'	=> 'Nama Tarif',
-					'rules'	=> 'required|rtrim|is_unique[tarif.nama_tarif]',
-					'errors'=> ['required' 	=> 'Form <b>%s</b> tidak boleh kosong',
-								'is_unique'	=> 'Nama Tarif sudah ada.']
+					'rules'	=> 'required|rtrim|is_unique[prices.name]',
+					'errors'=> [
+						'required' 	=> 'Form <b>%s</b> tidak boleh kosong',
+						'is_unique'	=> 'Nama Tarif sudah ada.'
+					]
 				],
 				[
-					'field'	=> 'waktu',
+					'field'	=> 'time',
 					'label'	=> 'Waktu Proses',
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required'=>'Form <b>%s</b> tidak boleh kosong.']
 				],
 				[
-					'field'	=> 'biaya',
+					'field'	=> 'amount',
 					'label'	=> 'Biaya',
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required'=>'Form <b>%s</b> tidak boleh kosong.']
@@ -82,14 +85,14 @@ defined('BASEPATH') OR exit ('No script direct access allowed');
 		{
 			return [
 				[
-					'field'	=> 'berat',
+					'field'	=> 'amount',
 					'label'	=> 'Berat',
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
 
 				],
 				[
-					'field'	=> 'nama',
+					'field'	=> 'name',
 					'label'	=> 'Nama Pemilik',
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
@@ -100,13 +103,13 @@ defined('BASEPATH') OR exit ('No script direct access allowed');
 		public function val_transaksi_satuan(){
 			return [
 				[
-					'field'	=> 'nama',
+					'field'	=> 'name',
 					'label'	=> 'Nama Pemilik',
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required' => 'Form %s tidak boleh kosong.']
 				],
 				[
-					'field'	=> 'jumlah',
+					'field'	=> 'amount',
 					'label'	=> 'Jumlah Barang',
 					'rules'	=> 'required|rtrim',
 					'errors'=> ['required' => 'Form %s tidak boleh kosong.']

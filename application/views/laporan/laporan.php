@@ -24,27 +24,24 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($tampil as $t){ 
-              ?>
-            <tr>
-              <td><?=$t->id_transaksi ?></td>
-              <td><?=$t->tgl_transaksi ?></td>
-              <td><?=$t->paket_transaksi ?></td>
-              <td><?=$t->berat_jumlah.' ('.$t->jenis_paket.')' ?></td>
-              <td><?=$t->total_transaksi ?></td>
-              <td>
-                <?php 
-                  if($t->status=='1'){
-                    echo "<a href='' class='btn btn-sm btn-success'><i class='fa fa-check'></i> Selesai</a>";
-
-                  }else{
-                echo "<a href='' class='btn btn-sm btn-secondary'><i class='fa fa-hourglass-half'></i> Proses</a>";
-
-                  }
-                 ?>
-              </td>
-            </tr>
-          <?php } ?>
+            <?php 
+              foreach($transactions as $data):
+            ?>
+              <tr>
+                <td><?=$data->receipt ?></td>
+                <td><?=$data->createDate ?></td>
+                <td><?=$data->package ?></td>
+                <td><?=$data->amount.' ('.$data->type.')' ?></td>
+                <td><?=$data->amount_transaction ?></td>
+                <td>
+                  <?php  if($data->status=='1'): ?> 
+                    <div class='btn btn-sm btn-success'><i class='fa fa-check'></i> Selesai</div>
+                  <?php else : ?>
+                    <div class='btn btn-sm btn-secondary'><i class='fa fa-hourglass-half'></i> Proses</div>
+                  <?php endif;?>
+                </td>
+              </tr>
+            <?php endforeach; ?>
           </tbody>
         </table>
       </div>
