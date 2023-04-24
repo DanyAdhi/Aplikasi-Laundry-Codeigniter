@@ -20,7 +20,7 @@ class UserController extends CI_Controller {
 	public function listHarga() {
 		$data = [
 			'content'	=> $this->folder.('tarif'),
-			'data'		=> $this->Model->get_all('tarif')->result()
+			'data'		=> $this->Model->get_all('packages')->result()
 		];
 		$this->load->view($this->layout, $data);
 	}

@@ -78,7 +78,7 @@
             <div class="form-row">
               <div class="col-12 col-md-9 mb-2 mb-md-0">
                 <input type="text" class="form-control form-control-lg bg-light" placeholder="Masukkan ID Order Kamu..." name="idOrder" value="<?=$id ?>" onkeypress="return inputAngka(event)">
-                <p class="text-left font-italic text-muted">Input 08041912181802 or 08041912181803 for demo</p>
+                <p class="text-left font-italic text-muted">Input 24042310510801 for demo</p>
               </div>
               <div class="col-12 col-md-2">
                 <button type="submit" class="btn btn-block btn-lg btn-primary">Cari !</button>
@@ -119,19 +119,14 @@
                     </div> 
                     <table class='table table-responseive table-borderless mt-4'>
                       <tr>
-                        <td width='150px'>Nama</td>
+                        <td width='100px'>Nama</td>
                         <td width='10px'>:</td>
-                        <td class='font-weight-bold'> <?=$data[0]['nama']?></td>
+                        <td class='font-weight-bold'> <?=$data[0]['name']?></td>
                       </tr>
                       <tr>
-                        <td>Tanggal Transaksi</td>
+                        <td>Tanggal</td>
                         <td>:</td>
-                        <td class='font-weight-bold'> <?=$data[0]['tgl_transaksi']?></td>
-                      </tr>
-                      <tr>
-                        <td>Jam Transaksi</td>
-                        <td>:</td>
-                        <td class='font-weight-bold'> <?=$data[0]['jam_transaksi']?></td>
+                        <td class='font-weight-bold'> <?=$data[0]['createDate']?></td>
                       </tr>
                     </table> 
                   </section>

@@ -37,11 +37,11 @@
 				return $query->result();
 		}
 
-		public function find_transaction_by_idTransaction($id_transaction) {
+		public function find_transaction_by_idTransaction($receipt) {
 			$this->db->select('*');
-			$this->db->from('transaksi_status');
-			$this->db->join('transaksi', 'transaksi.id_transaksi = transaksi_status.id_transaksi_s');
-			$this->db->where(['transaksi_status.id_transaksi_s' => $id_transaction]);
+			$this->db->from('transactions');
+			$this->db->join('transaction_status', 'transaction_status.transaction_id = transactions.id');
+			$this->db->where(['transactions.receipt' => $receipt]);
 			$query = $this->db->get();
 
 			return $query->result_array();

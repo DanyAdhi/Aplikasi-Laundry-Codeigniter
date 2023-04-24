@@ -23,9 +23,9 @@
                 <?php $i=1; foreach($data as $d): ?>
                 <tr>
                   <td align="center"><?=$i ?></td>
-                  <td><?=$d->nama_tarif ?></td>
-                  <td><?=$d->waktu_tarif ?></td>
-                  <td ><?=$d->biaya_tarif?> <span style="font-size: 12px"><?="/".$d->jenis_tarif ?></span></td>
+                  <td><?=$d->name ?></td>
+                  <td><?=$d->time ?></td>
+                  <td ><?=$d->amount?> <span style="font-size: 12px"><?="/".$d->type ?></span></td>
                 </tr>
                 <?php $i++ ; endforeach ?>
               </tbody>
