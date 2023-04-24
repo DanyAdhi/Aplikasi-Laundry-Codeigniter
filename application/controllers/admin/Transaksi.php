@@ -145,7 +145,6 @@
 					'strika'					=> 0,
 					'siap'						=> 0,
 					'selesai'					=> 0,
-					'tgl_ambil'				=> 0,
 				];
 				$this->Model->save('transaction_status', $data_transaction_status);
 				$id = str_replace(['=','+','/'], ['-','_','~'], $this->encryption->encrypt($id_transaction));
