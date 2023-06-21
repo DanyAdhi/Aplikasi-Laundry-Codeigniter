@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 				$this->Model->update('transaction_status', 'id', $id, [ $type => '1' ]);
 
 				if ($type == 'selesai') {
-					$this->Model->update('transactions', 'id', $get_data[0]['id'], ['status' 	=> 1]);
+					$selesai = $this->Model->update('transactions', 'id', $get_data[0]['transaction_id'], ['status' 	=> 1]);
 				}
 			}
 			redirect('admin/status/proses');
